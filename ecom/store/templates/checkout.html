@@ -1,0 +1,92 @@
+{% extends 'mainstore.html' %}
+
+{% load static %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-lg-6" id="form-wraper">
+      <div class="box-element">
+        <form action="form">
+          <div id="user-info">
+            <div class="form-filed">
+              <input required class="form-control" type="text" name="name" placeholder="Name">
+
+            </div>
+            <div class="form-filed">
+              <input required class="form-control" type="email" name="email" placeholder="Email">
+
+            </div>
+
+          </div>
+          <div id="shipping-info">
+            <hr>
+            <p>Shipping info</p>
+            <hr>
+            <div class="form-filed">
+              <input class="form-control" type="text" name="address" placeholder="Address">
+            </div>
+
+            <div class="form-filed">
+              <input class="form-control" type="text" name="city" placeholder="city">
+            </div>
+            
+            <div class="form-filed">
+              <input class="form-control" type="text" name="state" placeholder="State">
+            </div>
+
+            <div class="form-filed">
+              <input class="form-control" type="text" name="zipcode" placeholder="Zip-code">
+            </div>
+            <div class="form-filed">
+              <input class="form-control" type="text" name="Country" placeholder="Country">
+            </div>
+            
+          </div>
+          <hr>
+          <button type="button" class="btn btn-primary">Continue</button>
+        
+
+        </form>
+
+      </div>
+      <br>
+      <div class="box-element hidden" id="paymnet-info">
+        <small>Paypal Option</small>
+
+      </div>
+
+    </div>
+
+    <div class="col-lg-6 box-element">
+          
+      <a class="btn btn-outline-dark" href="{% url 'cart' %}">&#X2190 Back to cart</a>
+      
+      <hr>
+        <h3>Order Summary</h3>
+      <hr>
+      {% for item in items %}
+      <div class="row row-cols-4">
+        <div class="col">
+          <img id="card-icon" src="{{ item.product.imageURL }}" height="40px" >
+        </div>
+
+        <div class="col"><p>{{ item.product.name }}</p></div>
+
+        <div class="col"><p>${{ item.product.price }}</p></div>
+
+        <div class="col"><p>x {{item.quantity }}</p></div>
+      </div>
+      {% endfor %}
+      <h3>Items {{ order.get_cart_items }}</h3>
+      <h3>Total {{ order.get_cart_total | floatformat:2 }}</h3>
+
+    </div>
+  </div>
+
+
+
+
+  <h3>checkout</h3>
+
+{% endblock content %}

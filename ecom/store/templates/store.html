@@ -1,0 +1,37 @@
+{% extends 'mainstore.html' %}
+{% load static %}
+{% block content %}
+
+<h2>Demo JavaScript in Head</h2>
+<p id="demo">A Paragraph.</p>
+<button type="button" onclick="myFunction()">Try it</button>
+
+
+
+
+
+  <div class="row">
+    {% for product in products %}
+    <div class="col-lg-3">
+      <img src="{{ product.image.url }}" width="200px">
+      <div class="box-element product">
+          <h6><strong>{{product.name}} </strong></h6>
+        <hr>
+				<button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+
+        <!-- <button data-product={{product.id}} data-action="add"  class='btn btn-outline-secondary add btn update-cart'>Add to Cart</button> -->
+        
+        <!-- onclick="updateUserOrder()" -->
+        <a class="btn btn-outline-success" href="#">View</a>
+        <h4 style="display: inli-block; float: right">${{product.price|floatformat:2 }} </h4>
+      </div>
+    </div>
+    {% endfor %}
+
+{% endblock content %}
+
+
+
+
+
+

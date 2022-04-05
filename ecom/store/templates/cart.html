@@ -1,0 +1,75 @@
+{% extends 'mainstore.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="box-element">
+      <a class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; ContinueShopping</a>
+    </div>
+
+    <br>
+    <br>
+
+
+    <table class="table">
+      <tr>
+        <th><h5>Items <strong>{{ order.get_cart_items }}</strong></h5></th>
+        <th><h5>Total <strong>{{ order.get_cart_total }}</strong></h5></th>
+        <th>
+          <a style="float:right; margin:5px" class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
+
+        </th>
+      </tr>
+    </table>
+
+
+    <div class="box-element">
+      <div class="row cols-5">
+        <div class="col">Product</div>
+        <div class="col">Item</div>
+        <div class="col">Price</div>
+        <div class="col  d-flex justify-content-center">Quantity</div>
+        <div class="col">Total</div>
+      </div>
+
+      {% for item in items %}
+
+      <div class="row cols-5">
+        <div class="col"><img id="card-icon" src="{{ item.product.imageURL }}" height="100px" ></div>
+        <div class="col">{{ item.product.name}}</div>
+        <div class="col">${{ item.product.price|floatformat:2 }}</div>
+        <div class="col">
+          <div class="row cols-2">
+            <div class="col bg-info d-flex justify-content-end">{{ item.quantity }}</div>
+            <div class="col bg-info">
+              <div class="row  d-flex justify-content-start"></div>
+                <div class="col d-flex justify-content-start"><img id="card-icon" src="{% static 'store/images/arrowup.png' %}" height="25px" ></div>
+              <div class="row"></div>
+              <div class="col d-flex justify-content-start"><img id="card-icon" src="{% static 'store/images/arrowdown.png' %}" height="25px" ></div>
+            </div>
+          </div>
+        </div>
+        <div class="col">${{ item.get_total }}</div>
+
+      </div>
+      {% endfor %}
+
+
+
+
+    </div>
+
+
+  </div>
+</div>
+
+
+
+
+
+
+{% endblock content %}
